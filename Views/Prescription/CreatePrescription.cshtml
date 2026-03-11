@@ -1,0 +1,39 @@
+﻿@model Hospitl_Mangement_MVC.ViewModels.CreatePrescriptionViewModel
+
+<h2>Create Prescription</h2>
+
+<form asp-action="CreatePrescription" method="post">
+    <input type="hidden" asp-for="AppointmentId" /> <!-- This line binds the AppointmentId -->
+
+    <div class="form-group">
+        <label asp-for="TreatmentId"></label>
+        <select asp-for="TreatmentId" class="form-control">
+            @foreach (var treatment in Model.Treatments)
+            {
+                <option value="@treatment.Value">@treatment.Text</option>
+            }
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="MedicationId"></label>
+        <select asp-for="MedicationId" class="form-control">
+            @foreach (var medication in Model.Medications)
+            {
+                <option value="@medication.Value">@medication.Text</option>
+            }
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Quantity"></label>
+        <input asp-for="Quantity" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Duration"></label>
+        <input asp-for="Duration" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-success">Submit Prescription</button>
+</form>

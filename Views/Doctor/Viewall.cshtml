@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Doctor>
+
+@{
+    ViewData["Title"] = "All Staff Doctor";
+}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
+
+<h2>All Staff Doctor</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Speciatly</th>
+            <th>Department</th>
+            <th>Actions</th> <!-- New column for the buttons -->
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var Doctor in Model)
+        {
+            <tr>
+                <td>@($"{Doctor.First_Name} {Doctor.Last_Name}")</td>
+                <td>@Doctor.Speciatly</td>
+                <td>@Doctor.Department?.DepartmentName</td>
+                <td>
+                    <!-- Edit Button with Icon -->
+                    <a asp-action="Edit" asp-route-id="@Doctor.Id" class="btn btn-success">
+                        <i class="bi bi-pencil-square"></i> <!-- Pencil icon for Edit -->
+                    </a>
+                    <!-- Delete Button with Icon -->
+                    <form asp-action="Delete" asp-route-id="@Doctor.Id" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this Doctor?');">
+                            <i class="bi bi-trash"></i> <!-- Trash icon for Delete -->
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

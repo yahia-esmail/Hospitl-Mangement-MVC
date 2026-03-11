@@ -1,0 +1,40 @@
+﻿@model Doctor
+
+@{
+    ViewData["RoleId"] = "Create Doctor";
+}
+
+<h2>Create Doctor</h2>
+
+<!-- Display validation summary for all errors -->
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+<form asp-action="Create">
+    <div class="form-group">
+        <label asp-for="First_Name" class="control-label"></label>
+        <input asp-for="First_Name" class="form-control" />
+        <span asp-validation-for="First_Name" class="text-danger"></span>
+        @Html.ValidationMessageFor(model => model.First_Name, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        <label asp-for="Last_Name" class="control-label"></label>
+        <input asp-for="Last_Name" class="form-control" />
+        <span asp-validation-for="Last_Name" class="text-danger"></span>
+        @Html.ValidationMessageFor(model => model.Last_Name, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        <label asp-for="Speciatly" class="control-label"></label>
+        <input asp-for="Speciatly" class="form-control" />
+        <span asp-validation-for="Speciatly" class="text-danger"></span>
+        @Html.ValidationMessageFor(model => model.Speciatly, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        <label asp-for="DepartmentId" class="control-label"></label>
+        <select asp-for="DepartmentId" class="form-control" asp-items="ViewBag.DepartmentId"></select>
+        <span asp-validation-for="DepartmentId" class="text-danger"></span>
+        @Html.ValidationMessageFor(model => model.DepartmentId, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
+</form>

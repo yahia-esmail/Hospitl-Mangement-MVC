@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Hospitl_Mangement_MVC.ViewModels.DoctorViewModel>
+
+<h2> Doctors</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Specialty</th>
+            <th>Department</th>
+            @if(User.IsInRole("Doctor"))
+            {
+
+                <th>Actions</th>
+            }
+                
+
+            
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var doctor in Model)
+            {
+                <tr>
+                    <td>@doctor.First_Name</td>
+                    <td>@doctor.Last_Name</td>
+                    <td>@doctor.Speciatly</td>
+                    <td>@doctor.DepartmentName</td>
+                    @if (User.IsInRole("Doctor"))
+                    {
+                        <td>
+                            <!-- Link to View Appointments for the Doctor -->
+                            <a href="@Url.Action("Index", "Appointment", new { doctorId = doctor.Id })" class="btn btn-info">View Appointments</a>
+
+                            <!-- Link to Schedule Appointment for the Doctor -->
+                            <a href="@Url.Action("Schedule", "Appointment", new { doctorId = doctor.Id })" class="btn btn-primary">Schedule Appointment</a>
+                        </td>
+                    }
+
+
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="5">No doctors available.</td>
+            </tr>
+        }
+    </tbody>
+</table>

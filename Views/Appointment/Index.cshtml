@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Hospitl_Mangement_MVC.ViewModels.AppointmentViewModel>
+
+<h2>Appointments</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Appointment Date</th>
+            <th>Patient Name</th>
+            <th>Status</th>
+            <th>Reason</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var appointment in Model)
+            {
+                <tr>
+                    <td>@appointment.AppointmentDate?.ToString("MM/dd/yyyy")</td>
+                    <td>@appointment.PatientName</td>
+                    <td>@appointment.Status</td>
+                    <td>@appointment.Reason</td>
+                    <td>
+                        <!-- Link to create a prescription -->
+                        <a href="@Url.Action("CreatePrescription", "Prescription", new { appointmentId = appointment.AppointmentId })" class="btn btn-warning">Create Prescription</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="5">No appointments found.</td>
+            </tr>
+        }
+    </tbody>
+</table>

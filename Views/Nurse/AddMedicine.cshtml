@@ -1,0 +1,48 @@
+﻿@model Medication
+@{
+    ViewData["Title"] = "AddMedicine";
+}
+
+<h1>AddMedicine</h1>
+
+<form method="post">
+    <div class="container p-3 mt-4 border border-info" style="border-radius:50px;">
+        <div class="row p-2">
+            <h2 class="text-dark">Add New Medicine</h2>
+            <hr />
+        </div>
+        <div asp-validation-summary="All"></div>
+        <div class="mb-2">
+            <label asp-for="MedicationName"></label>
+            <input asp-for="MedicationName" class="form-control" />
+            <span asp-validation-for="MedicationName" class="text-danger"></span>
+        </div>
+        <div class="mb-2">
+            <label asp-for="Dosage"></label>
+            <input asp-for="Dosage" class="form-control" />
+            <span asp-validation-for="Dosage" class="text-danger"></span>
+        </div>
+        <div class="mb-2">
+            <label asp-for="Frequenccy"></label>
+            <input asp-for="Frequenccy" class="form-control" />
+            <span asp-validation-for="Frequenccy" class="text-danger"></span>
+        </div>
+        <div class="mb-2">
+            <label asp-for="SideEffectes"></label>
+            <input asp-for="SideEffectes" class="form-control" />
+            <span asp-validation-for="SideEffectes" class="text-danger"></span>
+        </div>
+        <br />
+        <hr />
+        <button type="submit" class="btn btn-primary" style="width:150px; margin-right:5px;">Save</button>
+        <a asp-action="GetAllMedicines" asp-controller="Nurse" class="btn btn-secondary" style="width:150px">
+            Back to Items
+        </a>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+

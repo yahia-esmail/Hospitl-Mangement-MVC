@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "Prescription Details";
+}
+
+<h2 class="text-center my-4 fw-bold">Prescription Details</h2>
+
+<div class="container mt-4">
+    <!-- Prescription Information -->
+    <div class="card mb-3">
+        <div class="card-body">
+            <h4 class="card-title">Prescription ID: @Model.PrescriptionID</h4>
+            <p><strong>Treatment ID:</strong> @Model.TreatmentID</p>
+            <p><strong>Quantity:</strong> @Model.Quantity</p>
+            <p><strong>Duration (in days):</strong> @Model.Duration</p>
+        </div>
+    </div>
+
+    <!-- Medications Information -->
+    <h3 class="mb-3">Medications</h3>
+    @if (Model.Medications != null && Model.Medications.Any())
+    {
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Medication ID</th>
+                    <th>Medication Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var medication in Model.Medications)
+                {
+                    <tr>
+                        <td>@medication.MedicationID</td>
+                        <td>@medication.Name</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p class="text-danger">No medications associated with this prescription.</p>
+    }
+
+    <div class="mt-4">
+        <a href="@Url.Action("Index", "Prescription")" class="btn btn-primary">Back to Prescriptions</a>
+    </div>
+</div>

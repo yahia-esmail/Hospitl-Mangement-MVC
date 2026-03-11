@@ -1,0 +1,39 @@
+﻿@using Hospitl_Mangement_MVC.ViewModel
+
+
+@model IEnumerable<UserViewModel>
+
+@{
+    ViewData["Title"] = "Users";
+}
+
+<h2>Users</h2>
+<div class="shadow-lg rounded-5 p-2 mt-3">
+<table class="table table-hover mt-4 rounded-5">
+    <thead>
+        <tr class="bg-primary text-white">
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>User Name</th>
+            <th>Email</th>
+            <th>Roles</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.FirstName</td>
+                <td>@user.LastName</td>
+                <td>@user.UserName</td>
+                <td>@user.Email</td>
+                <td>@string.Join(" , ", user.Roles.ToList())</td>
+                <td>
+                    <a class="btn btn-primary" asp-controller="Roles" asp-action="AssignRole" asp-route-userId="@user.Id" asp-route-roleId="@user.Roles" asp-route-userId="@user.Id">Manage Roles</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+</div>

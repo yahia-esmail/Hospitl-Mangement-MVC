@@ -1,0 +1,52 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Hospitl_Mangement_MVC.Models
+
+@inject SignInManager<BaseEntity> SignInManager
+@inject UserManager<BaseEntity> UserManager
+@if (SignInManager.IsSignedIn(User)){
+<div class="action">
+    <div class="profile" onclick="menuToggle();">
+        @if(UserManager.GetUserAsync(User).Result.ProfilePicture != null)
+        {
+            <img class="rounded-circle avatar" src="data:image/*;base64,@Convert.ToBase64String(UserManager.GetUserAsync(User).Result.ProfilePicture)" />
+        }
+        else
+        {
+            <img class="rounded-circle avatar" src="~/Images/Profile.jpg" />
+        }
+        </div>
+    <div class="menu">
+        <h3 class="text-white">Hello @UserManager.GetUserName(User)!</h3>
+        <ul>
+            <li>
+                <img src="/Images/user.png" /><a class="text-white" asp-area="Identity" asp-page="/Account/Manage/Index">Profile</a>
+
+            </li>
+            <li>
+                <img src="/Images/log-out.png" /><form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                    <button id="logout" type="submit" class="nav-link btn btn-link text-white border-0">Logout</button>
+                </form>
+            </li>
+        </ul>
+    </div>
+</div>
+<script>
+    function menuToggle() {
+        const toggleMenu = document.querySelector(".menu");
+        toggleMenu.classList.toggle("active");
+    }
+</script>
+}
+
+
+
+else
+{
+
+    <ul>
+        <li><a class="nav-link text-dark" id="register" asp-area="Identity" asp-page="/Account/Register">Register</a></li>
+
+        <li><a class="cta-btn d-none d-sm-block" asp-area="Identity" asp-page="/Account/Login">Login</a></li>
+    </ul>
+
+} 

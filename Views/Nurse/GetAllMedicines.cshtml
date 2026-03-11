@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Medication>
+@{
+    ViewData["Title"] = "GetAllMedicines";
+}
+
+<div class="col-3 py-3 mx-auto">
+    <h2 class="mx-auto">Medication Inventory</h2>
+</div>
+@* <div class="container row p-3">
+    <div class="col-12 text-end">
+        <a class="btn btn-primary" asp-controller="" asp-action="">
+            <i class="bi bi-plus"></i> &nbsp; Add New Medicine
+        </a>
+    </div>
+</div> *@
+
+
+<table class="table table-striped  text-center">
+    <thead>
+        <tr class="table-light">
+            <th scope="col">
+                Medicine Name
+            </th>
+            <th scope="col">
+                Dosage
+            </th>
+            <th scope="col">
+                Frequency
+            </th>
+            <th>Side Effects</th>
+            <th>
+                <a class="btn btn-primary" asp-controller="Nurse" asp-action="AddMedicine">
+                    <i class="bi bi-plus"></i> &nbsp; Add New Medicine
+                </a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="table-info">
+                <td width="20%">
+                    @item.MedicationName
+                </td>
+                <td width="20%">
+                    @item.Dosage
+                </td>
+                <td width="20%">
+                    @item.Frequenccy
+                </td>
+                <td width="20%">
+                    @item.SideEffectes
+                </td>
+                <td width="20%">
+                    <a class="btn btn-sm btn-success" asp-controller="Nurse" asp-route-Id="@item.MedicationID" asp-action="UpdateMedicine">
+                        <i class="bi bi-pencil"></i>&nbsp; Update
+                    </a>
+                    <a class="btn btn-sm btn-danger" asp-controller="Nurse" asp-route-Id="@item.MedicationID" asp-action="Delete">
+                        <i class="bi bi-trash3"></i>&nbsp; Delete
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
